@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/backend
+    networks:
+      - app
+    depends_on:
+      - mysql
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app/client
+      - /app/client/node_modules
+    networks:
+      - app
+    depends_on:
+      - backend
+
+  mysql:
+    image: mysql:latest
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    volumes:
+      - ./docker-configs/mysql/data:/var/lib/mysql
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
