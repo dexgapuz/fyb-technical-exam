@@ -15,9 +15,18 @@
 6. Migrate database `php artisan migrate`
 7. Generate JWT secret `php artisan jwt:secret`
 
+### For Docker
+
+1. Execute `docker-compose up -d`
+2. And then proceed to installation.
+
 ## Technologies used
 
 - [Laravel](https://laravel.com/)
 - [MySQL](https://www.mysql.com/)
 - [Vue](https://vuejs.org/)
 - [Typescript](https://www.typescriptlang.org/)
+
+## Developed and tested in:
+
+- [Docker](https://www.docker.com/)
